@@ -70,6 +70,12 @@ class GLWidget : public QGLWidget {
   void keyPressEvent(QKeyEvent *event);
 
  private:
+
+  GLuint VAOid;
+
+  GLuint VBOid;
+
+ 
   /**
    * @brief program_ The reflection shader program.
    */
