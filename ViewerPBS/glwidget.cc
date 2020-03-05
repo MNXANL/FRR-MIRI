@@ -143,15 +143,14 @@ bool GLWidget::LoadModel(const QString &filename) {
       1.0f, -1.0f, 0.0f,
       0.0f,  1.0f, 0.0f,
     };*/
-    std::cout << "llego" << std::endl;
-    std::cout << mesh_->min_ << std::endl;
-    int n = mesh->vertices_.size();
+    //std::cout << mesh_->min_ << std::endl;
+    int n = mesh_->vertices_.size();
     GLfloat g_vertex_buffer_data[n];
     for(int i = 0; i < n; ++i) 
     {
-      std::cout << i << std::endl;
-      g_vertex_buffer_data[i] = mesh->vertices_[i];
+      g_vertex_buffer_data[i] = mesh_->vertices_[i];
     }
+
     //Identification of VBO
     //Generate vertex buffer array object name
     glGenBuffers(1, &VBOid);
@@ -350,17 +349,15 @@ void GLWidget::paintGL() {
       glBindBuffer(GL_ARRAY_BUFFER, VBOid);
       glVertexAttribPointer(
         0,                  // atributo 0. No hay razón particular para el 0, pero debe corresponder en el shader.
-        3,                  // tamaño
+        (mesh_->vertices_.size() / 3),                  // tamaño
         GL_FLOAT,           // tipo
         GL_FALSE,           // normalizado?
         0,                    // Paso
         (void*)0            // desfase del buffer
       );
       // Dibujar el triángulo !
-      glDrawArrays(GL_TRIANGLES, 0, 3); // Empezar desde el vértice 0S; 3 vértices en total -> 1 triángulo
+      glDrawArrays(GL_TRIANGLES, 0, (mesh_->vertices_.size() / 3)); // Empezar desde el vértice 0S; 3 vértices en total -> 1 triángulo
       glDisableVertexAttribArray(0);
-
-
       // END.
     }
 
