@@ -1,9 +1,15 @@
 // Author: Marc Comino 2020
-
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
 #include <eigen3/Eigen/Geometry>
+
+#ifdef _WIN32
+    #define _USE_MATH_DEFINES
+    #include <math.h>
+#else
+    #include <math.h>
+#endif
 
 namespace data_visualization {
 
