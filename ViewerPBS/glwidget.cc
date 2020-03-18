@@ -127,6 +127,7 @@ bool GLWidget::LoadModel(const QString &filename) {
   if (res) {
     mesh_.reset(mesh.release());
     camera_.UpdateModel(mesh_->min_, mesh_->max_);
+
     // TODO(students): Create / Initialize buffers.
     
     //Creation of a VAO(Vertex Array Object)
@@ -136,30 +137,14 @@ bool GLWidget::LoadModel(const QString &filename) {
     
     //Bind VAO
     glBindVertexArray(VAOid);
-    
-    //Vertex of triangle
-    /*static const GLfloat g_vertex_buffer_data[] = {
-      -1.0f, -1.0f, 0.0f,
-      1.0f, -1.0f, 0.0f,
-      0.0f,  1.0f, 0.0f,
-    };*/
-    //std::cout << mesh_->min_ << std::endl;
-    int n = mesh_->vertices_.size();
-    GLfloat g_vertex_buffer_data[n];
-    for(int i = 0; i < n; ++i) 
-    {
-      g_vertex_buffer_data[i] = mesh_->vertices_[i];
-    }
-
     //Identification of VBO
     //Generate vertex buffer array object name
     glGenBuffers(1, &VBOid);
     // Bind vertex buffer 
     glBindBuffer(GL_ARRAY_BUFFER, VBOid);
     //Give our vertex to OpenGL
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh_->vertices_.size() * sizeof(float), &mesh_->vertices_[0], GL_STATIC_DRAW);
     // END.
-
     emit SetFaces(QString(std::to_string(mesh_->faces_.size() / 3).c_str()));
     emit SetVertices(
         QString(std::to_string(mesh_->vertices_.size() / 3).c_str()));
@@ -355,8 +340,6 @@ void GLWidget::paintGL() {
         0,                    // Paso
         (void*)0            // desfase del buffer
       );
-      // Dibujar el triángulo !
-      std::cout << mesh_->vertices_.size() / 3 << std::endl;
       glDrawArrays(GL_TRIANGLES, 0, (mesh_->vertices_.size() / 3)); // Empezar desde el vértice 0S; 3 vértices en total -> 1 triángulo
       glDisableVertexAttribArray(0);
       // END.
