@@ -70,11 +70,6 @@ class GLWidget : public QGLWidget {
   void keyPressEvent(QKeyEvent *event);
 
  private:
-
-  GLuint VAOid;
-
-  GLuint VBOid;
-
  
   /**
    * @brief program_ The reflection shader program.
@@ -110,6 +105,20 @@ class GLWidget : public QGLWidget {
    * @brief specular_map_ Diffuse cubemap texture.
    */
   GLuint specular_map_;
+  
+  /**
+   * @brief vbo_v_id Vertex Buffer id for vertices.
+   */
+  GLuint vbo_v_id;
+  /**
+  * @brief vbo_n_id Vertex Buffer id for normals.
+  */
+  GLuint  vbo_n_id;
+
+  /**
+  * @brief faces_id Vertex Buffer id for faces.
+  */
+  GLuint faces_id;
 
   /**
    * @brief initialized_ Whether the widget has finished initializations.

@@ -128,10 +128,30 @@ bool GLWidget::LoadModel(const QString &filename) {
     mesh_.reset(mesh.release());
     camera_.UpdateModel(mesh_->min_, mesh_->max_);
 
-    // TODO(students): Create / Initialize buffers.
+    // TODO(students): Create / Initialize buffers.    
+    // Initialize VBO for vertices
+    glGenBuffers(1, &vbo_v_id);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_v_id);
+    glBufferData(GL_ARRAY_BUFFER, mesh_->vertices_.size() * sizeof(float), &mesh_->vertices_[0], GL_STATIC_DRAW);
+
+
+    // Initialize VBO for normals
+    glGenBuffers(1, &vbo_n_id);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_n_id);
+    glBufferData(GL_ARRAY_BUFFER, mesh_->normals_.size() * sizeof(float), &mesh_->normals_[0], GL_STATIC_DRAW);
+
+    //glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // Initialize VBO for faces
+    glGenBuffers(1, &faces_id);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, faces_id);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh_->faces_.size() * sizeof(int), &mesh_->faces_[0], GL_STATIC_DRAW);
+
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    // END.
     
     //Creation of a VAO(Vertex Array Object)
-    
+    /*
     //Generate vertex array object name
     glGenVertexArrays(1, &VAOid);
     
@@ -144,7 +164,18 @@ bool GLWidget::LoadModel(const QString &filename) {
     glBindBuffer(GL_ARRAY_BUFFER, VBOid);
     //Give our vertex to OpenGL
     glBufferData(GL_ARRAY_BUFFER, mesh_->vertices_.size() * sizeof(float), &mesh_->vertices_[0], GL_STATIC_DRAW);
-    // END.
+    */
+
+
+
+
+
+
+
+
+
+
+
     emit SetFaces(QString(std::to_string(mesh_->faces_.size() / 3).c_str()));
     emit SetVertices(
         QString(std::to_string(mesh_->vertices_.size() / 3).c_str()));
@@ -329,19 +360,37 @@ void GLWidget::paintGL() {
 
       // TODO(students): Implement model rendering.
       
+      glBindBuffer(GL_ARRAY_BUFFER, vbo_v_id);
+      glEnableVertexAttribArray(kVertexAttributeIdx);
+      glVertexAttribPointer(kVertexAttributeIdx, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+      glBindBuffer(GL_ARRAY_BUFFER, vbo_n_id);
+      glEnableVertexAttribArray(kNormalAttributeIdx);
+      glVertexAttribPointer(kNormalAttributeIdx, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, faces_id);
+
+      glDrawElements(GL_TRIANGLES, mesh_->faces_.size(), GL_UNSIGNED_INT, 0);
+
+      glBindBuffer(GL_ARRAY_BUFFER, 0);
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+
+      /*
       // 1rst attribute buffer : vértices
       glEnableVertexAttribArray(0);
       glBindBuffer(GL_ARRAY_BUFFER, VBOid);
       glVertexAttribPointer(
-        0,                  // atributo 0. No hay razón particular para el 0, pero debe corresponder en el shader.
-        3,                  // tamaño
-        GL_FLOAT,           // tipo
-        GL_FALSE,           // normalizado?
-        0,                    // Paso
-        (void*)0            // desfase del buffer
+        0,                  // attribute 0. 
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalize?
+        0,            
+        (void*)0            // buffer disparity
       );
-      glDrawArrays(GL_TRIANGLES, 0, (mesh_->vertices_.size() / 3)); // Empezar desde el vértice 0S; 3 vértices en total -> 1 triángulo
-      glDisableVertexAttribArray(0);
+      glDrawArrays(GL_TRIANGLES, 0, (mesh_->vertices_.size() / 3)); // Begin from vertice 0; Total vertices from the model
+      glDisableVertexAttribArray(0);*/
       // END.
     }
 

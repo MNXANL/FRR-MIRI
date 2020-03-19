@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>828</width>
-    <height>638</height>
+    <width>827</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -83,8 +83,8 @@
         <widget class="QRadioButton" name="radio_reflection">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>30</y>
+           <x>20</x>
+           <y>70</y>
            <width>117</width>
            <height>22</height>
           </rect>
@@ -99,8 +99,8 @@
         <widget class="QRadioButton" name="radio_brdf">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>60</y>
+           <x>20</x>
+           <y>100</y>
            <width>117</width>
            <height>22</height>
           </rect>
@@ -113,7 +113,7 @@
          <property name="geometry">
           <rect>
            <x>70</x>
-           <y>80</y>
+           <y>140</y>
            <width>69</width>
            <height>27</height>
           </rect>
@@ -132,7 +132,7 @@
          <property name="geometry">
           <rect>
            <x>70</x>
-           <y>120</y>
+           <y>180</y>
            <width>69</width>
            <height>27</height>
           </rect>
@@ -151,7 +151,7 @@
          <property name="geometry">
           <rect>
            <x>70</x>
-           <y>160</y>
+           <y>220</y>
            <width>69</width>
            <height>27</height>
           </rect>
@@ -170,7 +170,7 @@
          <property name="geometry">
           <rect>
            <x>20</x>
-           <y>80</y>
+           <y>140</y>
            <width>31</width>
            <height>31</height>
           </rect>
@@ -183,7 +183,7 @@
          <property name="geometry">
           <rect>
            <x>20</x>
-           <y>120</y>
+           <y>180</y>
            <width>31</width>
            <height>31</height>
           </rect>
@@ -196,13 +196,26 @@
          <property name="geometry">
           <rect>
            <x>20</x>
-           <y>160</y>
+           <y>220</y>
            <width>31</width>
            <height>31</height>
           </rect>
          </property>
          <property name="text">
           <string>F0 B</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radio_simple">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>117</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Simple</string>
          </property>
         </widget>
        </widget>
@@ -335,8 +348,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>828</width>
-     <height>25</height>
+     <width>827</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
