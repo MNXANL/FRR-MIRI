@@ -105,6 +105,11 @@ class GLWidget : public QGLWidget {
    * @brief specular_map_ Diffuse cubemap texture.
    */
   GLuint specular_map_;
+
+  /**
+   * @brief VAO Vertex Array Object id.
+   */
+  GLuint VAO;
   
   /**
    * @brief vbo_v_id Vertex Buffer id for vertices.

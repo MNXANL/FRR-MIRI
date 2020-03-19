@@ -129,16 +129,26 @@ bool GLWidget::LoadModel(const QString &filename) {
     camera_.UpdateModel(mesh_->min_, mesh_->max_);
 
     // TODO(students): Create / Initialize buffers.    
+    // Create & bind empty VAO
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
     // Initialize VBO for vertices
     glGenBuffers(1, &vbo_v_id);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_v_id);
     glBufferData(GL_ARRAY_BUFFER, mesh_->vertices_.size() * sizeof(float), &mesh_->vertices_[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(kVertexAttributeIdx, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(kVertexAttributeIdx);
 
 
     // Initialize VBO for normals
     glGenBuffers(1, &vbo_n_id);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_n_id);
     glBufferData(GL_ARRAY_BUFFER, mesh_->normals_.size() * sizeof(float), &mesh_->normals_[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(kNormalAttributeIdx, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(kNormalAttributeIdx);
+
+    glBindVertexArray(0);
 
     //glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -360,20 +370,15 @@ void GLWidget::paintGL() {
 
       // TODO(students): Implement model rendering.
       
-      glBindBuffer(GL_ARRAY_BUFFER, vbo_v_id);
-      glEnableVertexAttribArray(kVertexAttributeIdx);
-      glVertexAttribPointer(kVertexAttributeIdx, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+   
 
-      glBindBuffer(GL_ARRAY_BUFFER, vbo_n_id);
-      glEnableVertexAttribArray(kNormalAttributeIdx);
-      glVertexAttribPointer(kNormalAttributeIdx, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
+      glBindVertexArray(VAO);
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, faces_id);
 
       glDrawElements(GL_TRIANGLES, mesh_->faces_.size(), GL_UNSIGNED_INT, 0);
 
-      glBindBuffer(GL_ARRAY_BUFFER, 0);
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+      glBindVertexArray(0);
 
 
 
