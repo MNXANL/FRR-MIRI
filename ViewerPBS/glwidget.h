@@ -150,11 +150,6 @@ class GLWidget : public QGLWidget {
   int shader_;
 
   /**
-   * @brief reflection_ Whether to use the reflection shader or the brdf shader.
-   */
-  bool reflection_;
-
-  /**
    * @brief fresnel_ Fresnel F0 color components.
    */
   Eigen::Vector3d fresnel_;

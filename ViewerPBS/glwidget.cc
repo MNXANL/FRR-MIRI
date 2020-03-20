@@ -103,7 +103,6 @@ GLWidget::GLWidget(QWidget *parent)
       width_(0.0),
       height_(0.0),
       shader_(0),
-      reflection_(true),
       fresnel_(0.2, 0.2, 0.2) {
   setFocusPolicy(Qt::StrongFocus);
 }
@@ -394,16 +393,19 @@ void GLWidget::paintGL() {
 }
 
 void GLWidget::SetSimple(bool set) {
+    std::cout << "simple" << std::endl;
     if (set) shader_ = 0;
     updateGL();
 }
 
 void GLWidget::SetReflection(bool set) {
+    std::cout << "relfection" << std::endl;
     if (set) shader_ = 1;
     updateGL();
 }
 
 void GLWidget::SetBRDF(bool set) {
+    std::cout << "BRDF" << std::endl;
     if (set) shader_ = 2;
     updateGL();
 }

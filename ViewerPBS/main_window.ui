@@ -406,6 +406,7 @@
     <slot>SetFresnelB(double)</slot>
     <slot>SetFresnelG(double)</slot>
     <slot>SetFresnelR(double)</slot>
+    <slot>SetSimple(bool)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -423,7 +424,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>796</x>
-     <y>566</y>
+     <y>565</y>
     </hint>
    </hints>
   </connection>
@@ -439,7 +440,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>796</x>
-     <y>587</y>
+     <y>585</y>
     </hint>
    </hints>
   </connection>
@@ -454,8 +455,8 @@
      <y>623</y>
     </hint>
     <hint type="destinationlabel">
-     <x>760</x>
-     <y>617</y>
+     <x>796</x>
+     <y>615</y>
     </hint>
    </hints>
   </connection>
@@ -466,8 +467,8 @@
    <slot>SetReflection(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
-     <y>80</y>
+     <x>752</x>
+     <y>116</y>
     </hint>
     <hint type="destinationlabel">
      <x>434</x>
@@ -482,8 +483,8 @@
    <slot>SetBRDF(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>638</x>
-     <y>107</y>
+     <x>752</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>539</x>
@@ -498,8 +499,8 @@
    <slot>SetFresnelB(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>744</x>
-     <y>211</y>
+     <x>754</x>
+     <y>256</y>
     </hint>
     <hint type="destinationlabel">
      <x>520</x>
@@ -514,8 +515,8 @@
    <slot>SetFresnelG(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>709</x>
-     <y>169</y>
+     <x>754</x>
+     <y>216</y>
     </hint>
     <hint type="destinationlabel">
      <x>559</x>
@@ -530,12 +531,28 @@
    <slot>SetFresnelR(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>700</x>
-     <y>129</y>
+     <x>754</x>
+     <y>176</y>
     </hint>
     <hint type="destinationlabel">
      <x>547</x>
      <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_simple</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>glwidget</receiver>
+   <slot>SetSimple(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>654</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>88</y>
     </hint>
    </hints>
   </connection>
