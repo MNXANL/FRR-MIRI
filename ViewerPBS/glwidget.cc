@@ -200,7 +200,7 @@ void GLWidget::initializeGL() {
   sky_program_ = std::make_unique<QOpenGLShaderProgram>();
 
   bool res =
-      LoadProgram(kSimpleFragmentShaderFile, kSimpleFragmentShaderFile,
+      LoadProgram(kSimpleVertexShaderFile, kSimpleFragmentShaderFile,
                   simple_program_.get());
   res =
       LoadProgram(kReflectionVertexShaderFile, kReflectionFragmentShaderFile,
@@ -304,17 +304,25 @@ void GLWidget::paintGL() {
 
     normal = normal.inverse().transpose();
 
-    if (mesh_ != nullptr) {
+    if (mesh_ != nullptr) 
+    {
       GLint projection_location, view_location, model_location,
           normal_matrix_location, specular_map_location, diffuse_map_location,
           fresnel_location;
       if (shader_ == 0) 
       {
           simple_program_->bind();
+          projection_location = simple_program_->uniformLocation("projection");
+          view_location = simple_program_->uniformLocation("view");
+          model_location = simple_program_->uniformLocation("model");
+          glUniformMatrix4fv(projection_location, 1, GL_FALSE, projection.data());
+          glUniformMatrix4fv(view_location, 1, GL_FALSE, view.data());
+          glUniformMatrix4fv(model_location, 1, GL_FALSE, model.data());
       }
       else 
       {
-          if (shader_ == 1) {
+          if (shader_ == 1) 
+          {
               reflection_program_->bind();
               projection_location =
                   reflection_program_->uniformLocation("projection");
@@ -328,7 +336,8 @@ void GLWidget::paintGL() {
                   reflection_program_->uniformLocation("diffuse_map");
               fresnel_location = reflection_program_->uniformLocation("fresnel");
           }
-          else {
+          else 
+          {
               brdf_program_->bind();
               projection_location = brdf_program_->uniformLocation("projection");
               view_location = brdf_program_->uniformLocation("view");
