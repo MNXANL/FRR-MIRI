@@ -64,7 +64,8 @@ bool LoadCubeMap(const QString &dir) {
   res = res && LoadImage(path + "/back.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
   res = res && LoadImage(path + "/front.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
-  if (res) {
+  if (res) 
+  {
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -101,6 +102,7 @@ GLWidget::GLWidget(QWidget *parent)
       initialized_(false),
       width_(0.0),
       height_(0.0),
+      shader_(0),
       reflection_(true),
       fresnel_(0.2, 0.2, 0.2) {
   setFocusPolicy(Qt::StrongFocus);
@@ -307,51 +309,54 @@ void GLWidget::paintGL() {
       GLint projection_location, view_location, model_location,
           normal_matrix_location, specular_map_location, diffuse_map_location,
           fresnel_location;
-
-      if (reflection_) {
-        reflection_program_->bind();
-        projection_location =
-            reflection_program_->uniformLocation("projection");
-        view_location = reflection_program_->uniformLocation("view");
-        model_location = reflection_program_->uniformLocation("model");
-        normal_matrix_location =
-            reflection_program_->uniformLocation("normal_matrix");
-        specular_map_location =
-            reflection_program_->uniformLocation("specular_map");
-        diffuse_map_location =
-            reflection_program_->uniformLocation("diffuse_map");
-        fresnel_location = reflection_program_->uniformLocation("fresnel");
-      } else {
-        brdf_program_->bind();
-        projection_location = brdf_program_->uniformLocation("projection");
-        view_location = brdf_program_->uniformLocation("view");
-        model_location = brdf_program_->uniformLocation("model");
-        normal_matrix_location =
-            brdf_program_->uniformLocation("normal_matrix");
-        specular_map_location = brdf_program_->uniformLocation("specular_map");
-        diffuse_map_location = brdf_program_->uniformLocation("diffuse_map");
-        fresnel_location = brdf_program_->uniformLocation("fresnel");
+      if (shader_ == 0) 
+      {
+          simple_program_->bind();
       }
+      else 
+      {
+          if (shader_ == 1) {
+              reflection_program_->bind();
+              projection_location =
+                  reflection_program_->uniformLocation("projection");
+              view_location = reflection_program_->uniformLocation("view");
+              model_location = reflection_program_->uniformLocation("model");
+              normal_matrix_location =
+                  reflection_program_->uniformLocation("normal_matrix");
+              specular_map_location =
+                  reflection_program_->uniformLocation("specular_map");
+              diffuse_map_location =
+                  reflection_program_->uniformLocation("diffuse_map");
+              fresnel_location = reflection_program_->uniformLocation("fresnel");
+          }
+          else {
+              brdf_program_->bind();
+              projection_location = brdf_program_->uniformLocation("projection");
+              view_location = brdf_program_->uniformLocation("view");
+              model_location = brdf_program_->uniformLocation("model");
+              normal_matrix_location =
+                  brdf_program_->uniformLocation("normal_matrix");
+              specular_map_location = brdf_program_->uniformLocation("specular_map");
+              diffuse_map_location = brdf_program_->uniformLocation("diffuse_map");
+              fresnel_location = brdf_program_->uniformLocation("fresnel");
+          }
 
-      glUniformMatrix4fv(projection_location, 1, GL_FALSE, projection.data());
-      glUniformMatrix4fv(view_location, 1, GL_FALSE, view.data());
-      glUniformMatrix4fv(model_location, 1, GL_FALSE, model.data());
-      glUniformMatrix3fv(normal_matrix_location, 1, GL_FALSE, normal.data());
+          glUniformMatrix4fv(projection_location, 1, GL_FALSE, projection.data());
+          glUniformMatrix4fv(view_location, 1, GL_FALSE, view.data());
+          glUniformMatrix4fv(model_location, 1, GL_FALSE, model.data());
+          glUniformMatrix3fv(normal_matrix_location, 1, GL_FALSE, normal.data());
 
-      glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_CUBE_MAP, specular_map_);
-      glUniform1i(specular_map_location, 0);
+          glActiveTexture(GL_TEXTURE0);
+          glBindTexture(GL_TEXTURE_CUBE_MAP, specular_map_);
+          glUniform1i(specular_map_location, 0);
 
-      glActiveTexture(GL_TEXTURE1);
-      glBindTexture(GL_TEXTURE_CUBE_MAP, diffuse_map_);
-      glUniform1i(diffuse_map_location, 1);
+          glActiveTexture(GL_TEXTURE1);
+          glBindTexture(GL_TEXTURE_CUBE_MAP, diffuse_map_);
+          glUniform1i(diffuse_map_location, 1);
 
-      glUniform3f(fresnel_location, fresnel_[0], fresnel_[1], fresnel_[2]);
-
+          glUniform3f(fresnel_location, fresnel_[0], fresnel_[1], fresnel_[2]);
+      }
       // TODO(students): Implement model rendering.
-      
-   
-
       glBindVertexArray(VAO);
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, faces_id);
 
@@ -388,14 +393,19 @@ void GLWidget::paintGL() {
   }
 }
 
+void GLWidget::SetSimple(bool set) {
+    if (set) shader_ = 0;
+    updateGL();
+}
+
 void GLWidget::SetReflection(bool set) {
-  reflection_ = set;
-  updateGL();
+    if (set) shader_ = 1;
+    updateGL();
 }
 
 void GLWidget::SetBRDF(bool set) {
-  reflection_ = !set;
-  updateGL();
+    if (set) shader_ = 2;
+    updateGL();
 }
 
 void GLWidget::SetFresnelR(double r) {

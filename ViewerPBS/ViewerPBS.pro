@@ -45,6 +45,8 @@ FORMS    += \
 OTHER_FILES +=
 
 DISTFILES += \
+    shaders/simple.frag \
+    shaders/simple.vert \
     shaders/reflection.frag \
     shaders/reflection.vert \
     shaders/brdf.frag \

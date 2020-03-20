@@ -144,6 +144,11 @@ class GLWidget : public QGLWidget {
    */
   float height_;
 
+    /**
+   * @brief shader_ Select the current shader.
+   */
+  int shader_;
+
   /**
    * @brief reflection_ Whether to use the reflection shader or the brdf shader.
    */
@@ -159,6 +164,11 @@ class GLWidget : public QGLWidget {
    * @brief paintGL Function that handles rendering the scene.
    */
   void paintGL();
+
+  /**
+   * @brief SetSimple Enables the simple shader.
+   */
+  void SetSimple(bool set);
 
   /**
    * @brief SetReflection Enables the reflection shader.
