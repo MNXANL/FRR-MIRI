@@ -16,6 +16,8 @@ const double kFieldOfView = 60;
 const double kZNear = 0.0001;
 const double kZFar = 10;
 
+const char kSimpleVertexShaderFile[] = "../shaders/simple.vert";
+const char kSimpleFragmentShaderFile[] = "../shaders/simple.frag";
 const char kReflectionVertexShaderFile[] = "../shaders/reflection.vert";
 const char kReflectionFragmentShaderFile[] = "../shaders/reflection.frag";
 const char kBRDFVertexShaderFile[] = "../shaders/brdf.vert";
@@ -150,41 +152,12 @@ bool GLWidget::LoadModel(const QString &filename) {
 
     glBindVertexArray(0);
 
-    //glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     // Initialize VBO for faces
     glGenBuffers(1, &faces_id);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, faces_id);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh_->faces_.size() * sizeof(int), &mesh_->faces_[0], GL_STATIC_DRAW);
 
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     // END.
-    
-    //Creation of a VAO(Vertex Array Object)
-    /*
-    //Generate vertex array object name
-    glGenVertexArrays(1, &VAOid);
-    
-    //Bind VAO
-    glBindVertexArray(VAOid);
-    //Identification of VBO
-    //Generate vertex buffer array object name
-    glGenBuffers(1, &VBOid);
-    // Bind vertex buffer 
-    glBindBuffer(GL_ARRAY_BUFFER, VBOid);
-    //Give our vertex to OpenGL
-    glBufferData(GL_ARRAY_BUFFER, mesh_->vertices_.size() * sizeof(float), &mesh_->vertices_[0], GL_STATIC_DRAW);
-    */
-
-
-
-
-
-
-
-
-
-
 
     emit SetFaces(QString(std::to_string(mesh_->faces_.size() / 3).c_str()));
     emit SetVertices(
@@ -220,13 +193,17 @@ void GLWidget::initializeGL() {
   glGenTextures(1, &specular_map_);
   glGenTextures(1, &diffuse_map_);
 
+  simple_program_ = std::make_unique<QOpenGLShaderProgram>();
   reflection_program_ = std::make_unique<QOpenGLShaderProgram>();
   brdf_program_ = std::make_unique<QOpenGLShaderProgram>();
   sky_program_ = std::make_unique<QOpenGLShaderProgram>();
 
   bool res =
+      LoadProgram(kSimpleFragmentShaderFile, kSimpleFragmentShaderFile,
+                  simple_program_.get());
+  res =
       LoadProgram(kReflectionVertexShaderFile, kReflectionFragmentShaderFile,
-                  reflection_program_.get());
+          reflection_program_.get());
   res = res && LoadProgram(kBRDFVertexShaderFile, kBRDFFragmentShaderFile,
                            brdf_program_.get());
   res = res && LoadProgram(kSkyVertexShaderFile, kSkyFragmentShaderFile,
@@ -286,11 +263,14 @@ void GLWidget::keyPressEvent(QKeyEvent *event) {
   if (event->key() == Qt::Key_D) camera_.Rotate(1);
 
   if (event->key() == Qt::Key_R) {
-    reflection_program_.reset();
+    simple_program_.reset();
+    simple_program_ = std::make_unique<QOpenGLShaderProgram>();
+    LoadProgram(kSimpleFragmentShaderFile, kSimpleFragmentShaderFile,
+        simple_program_.get());
+    simple_program_.reset();
     reflection_program_ = std::make_unique<QOpenGLShaderProgram>();
     LoadProgram(kReflectionVertexShaderFile, kReflectionFragmentShaderFile,
                 reflection_program_.get());
-
     brdf_program_.reset();
     brdf_program_ = std::make_unique<QOpenGLShaderProgram>();
     LoadProgram(kBRDFVertexShaderFile, kBRDFFragmentShaderFile,
@@ -379,23 +359,6 @@ void GLWidget::paintGL() {
 
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
       glBindVertexArray(0);
-
-
-
-      /*
-      // 1rst attribute buffer : vértices
-      glEnableVertexAttribArray(0);
-      glBindBuffer(GL_ARRAY_BUFFER, VBOid);
-      glVertexAttribPointer(
-        0,                  // attribute 0. 
-        3,                  // size
-        GL_FLOAT,           // type
-        GL_FALSE,           // normalize?
-        0,            
-        (void*)0            // buffer disparity
-      );
-      glDrawArrays(GL_TRIANGLES, 0, (mesh_->vertices_.size() / 3)); // Begin from vertice 0; Total vertices from the model
-      glDisableVertexAttribArray(0);*/
       // END.
     }
 

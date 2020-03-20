@@ -72,8 +72,12 @@ class GLWidget : public QGLWidget {
  private:
  
   /**
-   * @brief program_ The reflection shader program.
+   * @brief program_ The simple shader program.
    */
+  std::unique_ptr<QOpenGLShaderProgram> simple_program_;
+  /**
+  * @brief program_ The reflection shader program.
+  */
   std::unique_ptr<QOpenGLShaderProgram> reflection_program_;
 
   /**

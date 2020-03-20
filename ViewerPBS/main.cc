@@ -2,6 +2,8 @@
 
 #include <QApplication>
 #include <QGLFormat>
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include "./main_window.h"
 
 int main(int argc, char *argv[]) {
