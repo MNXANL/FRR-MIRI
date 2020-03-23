@@ -373,59 +373,43 @@ void GLWidget::paintGL() {
 
       glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
       glBindVertexArray(0);
-
       // skybox VAO
-      GLfloat skyboxVertices[] = {
-          // positions          
-          -4.0f,  4.0f, -4.0f,
-          -4.0f, -4.0f, -4.0f,
-           4.0f, -4.0f, -4.0f,
-           4.0f, -4.0f, -4.0f,
-           4.0f,  4.0f, -4.0f,
-          -4.0f,  4.0f, -4.0f,
-
-          -4.0f, -4.0f,  4.0f,
-          -4.0f, -4.0f, -4.0f,
-          -4.0f,  4.0f, -4.0f,
-          -4.0f,  4.0f, -4.0f,
-          -4.0f,  4.0f,  4.0f,
-          -4.0f, -4.0f,  4.0f,
-
-           4.0f, -4.0f, -4.0f,
-           4.0f, -4.0f,  4.0f,
-           4.0f,  4.0f,  4.0f,
-           4.0f,  4.0f,  4.0f,
-           4.0f,  4.0f, -4.0f,
-           4.0f, -4.0f, -4.0f,
-
-          -4.0f, -4.0f,  4.0f,
-          -4.0f,  4.0f,  4.0f,
-           4.0f,  4.0f,  4.0f,
-           4.0f,  4.0f,  4.0f,
-           4.0f, -4.0f,  4.0f,
-          -4.0f, -4.0f,  4.0f,
-
-          -4.0f,  4.0f, -4.0f,
-           4.0f,  4.0f, -4.0f,
-           4.0f,  4.0f,  4.0f,
-           4.0f,  4.0f,  4.0f,
-          -4.0f,  4.0f,  4.0f,
-          -4.0f,  4.0f, -4.0f,
-
-          -4.0f, -4.0f, -4.0f,
-          -4.0f, -4.0f,  4.0f,
-           4.0f, -4.0f, -4.0f,
-           4.0f, -4.0f, -4.0f,
-          -4.0f, -4.0f,  4.0f,
-           4.0f, -4.0f,  4.0f
+      GLfloat SB = 4.0f; //SIZE
+      GLfloat skyboxVertices[] = { // positions
+         -SB,  SB, -SB,
+         -SB, -SB, -SB,
+          SB, -SB, -SB,
+          SB,  SB, -SB,
+         -SB, -SB,  SB,
+         -SB,  SB,  SB,
+          SB, -SB,  SB,
+          SB,  SB,  SB
       };
+
+      GLubyte skyboxIndices[] = { // indices per face
+          0, 1, 2, 2, 3, 0,
+          4, 1, 0, 0, 5, 4,
+
+          2, 6, 7, 7, 3, 2,
+          4, 5, 7, 7, 6, 4,
+
+          0, 3, 7, 7, 5, 0,
+          1, 4, 2, 2, 4, 6
+      };
+
       glGenVertexArrays(1, &skyboxVAO);
-      glGenBuffers(1, &skyboxVBO);
       glBindVertexArray(skyboxVAO);
+      glGenBuffers(1, &skyboxVBO);
+
       glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-      glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+      glVertexAttribPointer((GLuint)0, 3, GL_FLOAT, GL_FALSE, 0, 0);
       glEnableVertexAttribArray(0);
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+
+
+      glGenBuffers(1, &skyIndexVBO);
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skyIndexVBO);
+      glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxIndices, GL_STATIC_DRAW);
       // END.
     }
 
@@ -453,7 +437,7 @@ void GLWidget::paintGL() {
     // skybox cube
     glBindVertexArray(skyboxVAO);
     glActiveTexture(GL_TEXTURE0);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, (void*) 0);
     glBindVertexArray(0);
     glDepthFunc(GL_LESS);
     

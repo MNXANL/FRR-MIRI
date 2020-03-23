@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'main_window.ui'
 **
-** Created by: Qt User Interface Compiler version 5.14.1
+** Created by: Qt User Interface Compiler version 5.12.7
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -206,26 +206,26 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionQuit->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
-        actionLoad->setText(QCoreApplication::translate("MainWindow", "Load", nullptr));
-        actionLoad_Specular->setText(QCoreApplication::translate("MainWindow", "Load Specular", nullptr));
-        actionLoad_Diffuse->setText(QCoreApplication::translate("MainWindow", "Load Diffuse", nullptr));
-        TreeOptions->setTitle(QCoreApplication::translate("MainWindow", "Options", nullptr));
-        radio_reflection->setText(QCoreApplication::translate("MainWindow", "Reflection", nullptr));
-        radio_brdf->setText(QCoreApplication::translate("MainWindow", "Brdf", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "F0 R", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "F0 G", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "F0 B", nullptr));
-        radio_simple->setText(QCoreApplication::translate("MainWindow", "Simple", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionQuit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
+        actionLoad->setText(QApplication::translate("MainWindow", "Load", nullptr));
+        actionLoad_Specular->setText(QApplication::translate("MainWindow", "Load Specular", nullptr));
+        actionLoad_Diffuse->setText(QApplication::translate("MainWindow", "Load Diffuse", nullptr));
+        TreeOptions->setTitle(QApplication::translate("MainWindow", "Options", nullptr));
+        radio_reflection->setText(QApplication::translate("MainWindow", "Reflection", nullptr));
+        radio_brdf->setText(QApplication::translate("MainWindow", "Brdf", nullptr));
+        label->setText(QApplication::translate("MainWindow", "F0 R", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "F0 G", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "F0 B", nullptr));
+        radio_simple->setText(QApplication::translate("MainWindow", "Simple", nullptr));
         RenderOptions->setTitle(QString());
-        Label_NumFaces->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        Label_Faces->setText(QCoreApplication::translate("MainWindow", "Faces", nullptr));
-        Label_Vertices->setText(QCoreApplication::translate("MainWindow", "Vertices", nullptr));
-        Label_NumVertices->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        Label_Framerate->setText(QCoreApplication::translate("MainWindow", "Framerate", nullptr));
-        Label_NumFramerate->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
+        Label_NumFaces->setText(QApplication::translate("MainWindow", "0", nullptr));
+        Label_Faces->setText(QApplication::translate("MainWindow", "Faces", nullptr));
+        Label_Vertices->setText(QApplication::translate("MainWindow", "Vertices", nullptr));
+        Label_NumVertices->setText(QApplication::translate("MainWindow", "0", nullptr));
+        Label_Framerate->setText(QApplication::translate("MainWindow", "Framerate", nullptr));
+        Label_NumFramerate->setText(QApplication::translate("MainWindow", "0", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

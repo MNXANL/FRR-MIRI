@@ -102,7 +102,7 @@ public:
         radio_reflection = new QRadioButton(TreeOptions);
         radio_reflection->setObjectName(QString::fromUtf8("radio_reflection"));
         radio_reflection->setGeometry(QRect(20, 70, 117, 22));
-        radio_reflection->setChecked(true);
+        radio_reflection->setChecked(false);
         radio_brdf = new QRadioButton(TreeOptions);
         radio_brdf->setObjectName(QString::fromUtf8("radio_brdf"));
         radio_brdf->setGeometry(QRect(20, 100, 117, 22));
@@ -136,6 +136,8 @@ public:
         radio_simple = new QRadioButton(TreeOptions);
         radio_simple->setObjectName(QString::fromUtf8("radio_simple"));
         radio_simple->setGeometry(QRect(20, 40, 117, 22));
+        radio_simple->setContextMenuPolicy(Qt::CustomContextMenu);
+        radio_simple->setChecked(true);
 
         Configuration->addWidget(TreeOptions);
 
@@ -199,6 +201,7 @@ public:
         QObject::connect(spin_f0b, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelB(double)));
         QObject::connect(spin_f0g, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelG(double)));
         QObject::connect(spin_f0r, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelR(double)));
+        QObject::connect(radio_simple, SIGNAL(clicked(bool)), glwidget, SLOT(SetSimple(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
