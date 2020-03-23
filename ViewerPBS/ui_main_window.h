@@ -216,6 +216,7 @@ public:
         QObject::connect(glwidget, SIGNAL(SetFaces(QString)), Label_NumFaces, SLOT(setText(QString)));
         QObject::connect(glwidget, SIGNAL(SetVertices(QString)), Label_NumVertices, SLOT(setText(QString)));
         QObject::connect(glwidget, SIGNAL(SetFramerate(QString)), Label_NumFramerate, SLOT(setText(QString)));
+        QObject::connect(radio_simple, SIGNAL(clicked(bool)), glwidget, SLOT(SetSimple(bool)));
         QObject::connect(radio_reflection, SIGNAL(clicked(bool)), glwidget, SLOT(SetReflection(bool)));
         QObject::connect(radio_brdf, SIGNAL(clicked(bool)), glwidget, SLOT(SetBRDF(bool)));
         QObject::connect(spin_f0b, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelB(double)));

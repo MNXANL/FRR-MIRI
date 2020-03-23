@@ -109,6 +109,16 @@ class GLWidget : public QGLWidget {
    * @brief specular_map_ Diffuse cubemap texture.
    */
   GLuint specular_map_;
+  
+  /**
+   * @brief skyboxVAO Vertex Array Object id for skybox.
+   */
+  GLuint skyboxVAO;
+
+  /**
+   * @brief skyboxVBO Vertex Buffer Object id for skybox.
+   */
+  GLuint skyboxVBO;
 
   /**
    * @brief VAO Vertex Array Object id.
