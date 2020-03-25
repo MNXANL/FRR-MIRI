@@ -1,22 +1,15 @@
-#version 330
+#version 330 core
+out vec4 FragColor;
 
-smooth in vec3 world_normal;
-smooth in vec3 world_vertex;
-flat in vec3 world_camera_pos;
+in vec3 frag_normal;
+in vec3 frag_vertex;
+in vec3 camera_position;
 
 uniform samplerCube specular_map;
 
-uniform mat4 view;
-out vec4 frag_color;
-
-
 void main()
-{
-    vec3 N = normalize(world_normal);
-    vec3 I = normalize(world_camera_pos - world_vertex);
-    vec3 R = reflect(-I,N);
-
-    vec3 gamma = pow(texture(specular_map,R).rgb,vec3(1.0/2.2));
-    frag_color = vec4(gamma,1.0);
-
+{             
+    vec3 I = normalize(frag_vertex - camera_position);
+    vec3 R = reflect(I, normalize(frag_normal));
+    FragColor = vec4(texture(specular_map, R).rgb, 1.0);
 }

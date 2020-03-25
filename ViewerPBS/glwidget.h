@@ -176,9 +176,9 @@ class GLWidget : public QGLWidget {
   void paintGL();
 
   /**
-   * @brief SetSimple Enables the simple shader.
+   * @brief SetRefraction Enables the simple shader.
    */
-  void SetSimple(bool set);
+  void SetRefraction(bool set);
 
   /**
    * @brief SetReflection Enables the reflection shader.

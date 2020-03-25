@@ -205,7 +205,7 @@
           <string>F0 B</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radio_simple">
+        <widget class="QRadioButton" name="radio_refraction">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -218,7 +218,7 @@
           <enum>Qt::CustomContextMenu</enum>
          </property>
          <property name="text">
-          <string>Simple</string>
+          <string>Refraction</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -406,7 +406,7 @@
     <slot>SetFresnelB(double)</slot>
     <slot>SetFresnelG(double)</slot>
     <slot>SetFresnelR(double)</slot>
-    <slot>SetSimple(bool)</slot>
+    <slot>SetRefraction(bool)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -541,10 +541,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>radio_simple</sender>
+   <sender>radio_refraction</sender>
    <signal>clicked(bool)</signal>
    <receiver>glwidget</receiver>
-   <slot>SetSimple(bool)</slot>
+   <slot>SetRefraction(bool)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>654</x>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'main_window.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.7
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -47,7 +47,7 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
-    QRadioButton *radio_simple;
+    QRadioButton *radio_refraction;
     QSpacerItem *Spacer;
     QGroupBox *RenderOptions;
     QLabel *Label_NumFaces;
@@ -131,11 +131,11 @@ public:
         label_3 = new QLabel(TreeOptions);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(20, 220, 31, 31));
-        radio_simple = new QRadioButton(TreeOptions);
-        radio_simple->setObjectName(QString::fromUtf8("radio_simple"));
-        radio_simple->setGeometry(QRect(20, 40, 117, 22));
-        radio_simple->setContextMenuPolicy(Qt::CustomContextMenu);
-        radio_simple->setChecked(true);
+        radio_refraction = new QRadioButton(TreeOptions);
+        radio_refraction->setObjectName(QString::fromUtf8("radio_refraction"));
+        radio_refraction->setGeometry(QRect(20, 40, 117, 22));
+        radio_refraction->setContextMenuPolicy(Qt::CustomContextMenu);
+        radio_refraction->setChecked(true);
 
         Configuration->addWidget(TreeOptions);
 
@@ -199,33 +199,33 @@ public:
         QObject::connect(spin_f0b, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelB(double)));
         QObject::connect(spin_f0g, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelG(double)));
         QObject::connect(spin_f0r, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelR(double)));
-        QObject::connect(radio_simple, SIGNAL(clicked(bool)), glwidget, SLOT(SetSimple(bool)));
+        QObject::connect(radio_refraction, SIGNAL(clicked(bool)), glwidget, SLOT(SetRefraction(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionQuit->setText(QApplication::translate("MainWindow", "Quit", nullptr));
-        actionLoad->setText(QApplication::translate("MainWindow", "Load", nullptr));
-        actionLoad_Specular->setText(QApplication::translate("MainWindow", "Load Specular", nullptr));
-        actionLoad_Diffuse->setText(QApplication::translate("MainWindow", "Load Diffuse", nullptr));
-        TreeOptions->setTitle(QApplication::translate("MainWindow", "Options", nullptr));
-        radio_reflection->setText(QApplication::translate("MainWindow", "Reflection", nullptr));
-        radio_brdf->setText(QApplication::translate("MainWindow", "Brdf", nullptr));
-        label->setText(QApplication::translate("MainWindow", "F0 R", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "F0 G", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "F0 B", nullptr));
-        radio_simple->setText(QApplication::translate("MainWindow", "Simple", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionQuit->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
+        actionLoad->setText(QCoreApplication::translate("MainWindow", "Load", nullptr));
+        actionLoad_Specular->setText(QCoreApplication::translate("MainWindow", "Load Specular", nullptr));
+        actionLoad_Diffuse->setText(QCoreApplication::translate("MainWindow", "Load Diffuse", nullptr));
+        TreeOptions->setTitle(QCoreApplication::translate("MainWindow", "Options", nullptr));
+        radio_reflection->setText(QCoreApplication::translate("MainWindow", "Reflection", nullptr));
+        radio_brdf->setText(QCoreApplication::translate("MainWindow", "Brdf", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "F0 R", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "F0 G", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "F0 B", nullptr));
+        radio_refraction->setText(QCoreApplication::translate("MainWindow", "Refraction", nullptr));
         RenderOptions->setTitle(QString());
-        Label_NumFaces->setText(QApplication::translate("MainWindow", "0", nullptr));
-        Label_Faces->setText(QApplication::translate("MainWindow", "Faces", nullptr));
-        Label_Vertices->setText(QApplication::translate("MainWindow", "Vertices", nullptr));
-        Label_NumVertices->setText(QApplication::translate("MainWindow", "0", nullptr));
-        Label_Framerate->setText(QApplication::translate("MainWindow", "Framerate", nullptr));
-        Label_NumFramerate->setText(QApplication::translate("MainWindow", "0", nullptr));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+        Label_NumFaces->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        Label_Faces->setText(QCoreApplication::translate("MainWindow", "Faces", nullptr));
+        Label_Vertices->setText(QCoreApplication::translate("MainWindow", "Vertices", nullptr));
+        Label_NumVertices->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        Label_Framerate->setText(QCoreApplication::translate("MainWindow", "Framerate", nullptr));
+        Label_NumFramerate->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

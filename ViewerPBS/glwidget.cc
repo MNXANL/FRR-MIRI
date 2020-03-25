@@ -16,8 +16,8 @@ const double kFieldOfView = 60;
 const double kZNear = 0.0001;
 const double kZFar = 10;
 
-const char kSimpleVertexShaderFile[] = "../shaders/simple.vert";
-const char kSimpleFragmentShaderFile[] = "../shaders/simple.frag";
+const char kSimpleVertexShaderFile[] = "../shaders/refraction.vert";
+const char kSimpleFragmentShaderFile[] = "../shaders/refraction.frag";
 const char kReflectionVertexShaderFile[] = "../shaders/reflection.vert";
 const char kReflectionFragmentShaderFile[] = "../shaders/reflection.frag";
 const char kBRDFVertexShaderFile[] = "../shaders/brdf.vert";
@@ -312,29 +312,29 @@ void GLWidget::paintGL() {
           fresnel_location;
       if (shader_ == 0) 
       {
-          simple_program_->bind();
-          projection_location = simple_program_->uniformLocation("projection");
+          simple_program_->bind();  
           view_location = simple_program_->uniformLocation("view");
           model_location = simple_program_->uniformLocation("model");
+          specular_map_location = reflection_program_->uniformLocation("specular_map");
+          projection_location = simple_program_->uniformLocation("projection");
           glUniformMatrix4fv(projection_location, 1, GL_FALSE, projection.data());
           glUniformMatrix4fv(view_location, 1, GL_FALSE, view.data());
           glUniformMatrix4fv(model_location, 1, GL_FALSE, model.data());
+          glActiveTexture(GL_TEXTURE0);
+          glBindTexture(GL_TEXTURE_CUBE_MAP, specular_map_);
+          glUniform1i(specular_map_location, 0);
       }
       else 
       {
           if (shader_ == 1) 
           {
               reflection_program_->bind();
-              projection_location =
-                  reflection_program_->uniformLocation("projection");
+              projection_location = reflection_program_->uniformLocation("projection");
               view_location = reflection_program_->uniformLocation("view");
               model_location = reflection_program_->uniformLocation("model");
-              normal_matrix_location =
-                  reflection_program_->uniformLocation("normal_matrix");
-              specular_map_location =
-                  reflection_program_->uniformLocation("specular_map");
-              diffuse_map_location =
-                  reflection_program_->uniformLocation("diffuse_map");
+              normal_matrix_location = reflection_program_->uniformLocation("normal_matrix");
+              specular_map_location = reflection_program_->uniformLocation("specular_map");
+              diffuse_map_location = reflection_program_->uniformLocation("diffuse_map");
               fresnel_location = reflection_program_->uniformLocation("fresnel");
           }
           else 
@@ -445,8 +445,8 @@ void GLWidget::paintGL() {
   }
 }
 
-void GLWidget::SetSimple(bool set) {
-    std::cout << "simple" << std::endl;
+void GLWidget::SetRefraction(bool set) {
+    std::cout << "refraction" << std::endl;
     if (set) shader_ = 0;
     updateGL();
 }
