@@ -37,7 +37,8 @@ HEADERS  += \
     mesh_io.h \
     main_window.h \
     glwidget.h \
-    camera.h
+    camera.h \
+    ui_main_window.h
 
 FORMS    += \
     main_window.ui
@@ -45,6 +46,8 @@ FORMS    += \
 OTHER_FILES +=
 
 DISTFILES += \
+    shaders/refraction.frag \
+    shaders/refraction.vert \
     shaders/simple.frag \
     shaders/simple.vert \
     shaders/reflection.frag \

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_GLWidget_t {
     QByteArrayData data[13];
-    char stringdata0[124];
+    char stringdata0[128];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,18 +37,18 @@ QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 11), // "SetVertices"
 QT_MOC_LITERAL(4, 31, 12), // "SetFramerate"
 QT_MOC_LITERAL(5, 44, 7), // "paintGL"
-QT_MOC_LITERAL(6, 52, 9), // "SetSimple"
-QT_MOC_LITERAL(7, 62, 3), // "set"
-QT_MOC_LITERAL(8, 66, 13), // "SetReflection"
-QT_MOC_LITERAL(9, 80, 7), // "SetBRDF"
-QT_MOC_LITERAL(10, 88, 11), // "SetFresnelR"
-QT_MOC_LITERAL(11, 100, 11), // "SetFresnelB"
-QT_MOC_LITERAL(12, 112, 11) // "SetFresnelG"
+QT_MOC_LITERAL(6, 52, 13), // "SetRefraction"
+QT_MOC_LITERAL(7, 66, 3), // "set"
+QT_MOC_LITERAL(8, 70, 13), // "SetReflection"
+QT_MOC_LITERAL(9, 84, 7), // "SetBRDF"
+QT_MOC_LITERAL(10, 92, 11), // "SetFresnelR"
+QT_MOC_LITERAL(11, 104, 11), // "SetFresnelB"
+QT_MOC_LITERAL(12, 116, 11) // "SetFresnelG"
 
     },
     "GLWidget\0SetFaces\0\0SetVertices\0"
-    "SetFramerate\0paintGL\0SetSimple\0set\0"
-    "SetReflection\0SetBRDF\0SetFresnelR\0"
+    "SetFramerate\0paintGL\0SetRefraction\0"
+    "set\0SetReflection\0SetBRDF\0SetFresnelR\0"
     "SetFresnelB\0SetFresnelG"
 };
 #undef QT_MOC_LITERAL
@@ -107,7 +107,7 @@ void GLWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->SetVertices((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->SetFramerate((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->paintGL(); break;
-        case 4: _t->SetSimple((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 4: _t->SetRefraction((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 5: _t->SetReflection((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 6: _t->SetBRDF((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 7: _t->SetFresnelR((*reinterpret_cast< double(*)>(_a[1]))); break;

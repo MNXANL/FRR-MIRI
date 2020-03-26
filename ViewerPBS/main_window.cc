@@ -22,7 +22,7 @@ void MainWindow::on_actionQuit_triggered() { close(); }
 void MainWindow::on_actionLoad_triggered() {
   QString filename;
 
-  filename = QFileDialog::getOpenFileName(this, tr("Load model"), "./",
+  filename = QFileDialog::getOpenFileName(this, tr("Load model"), "../models",
                                           tr("PLY Files ( *.ply )"));
   if (!filename.isNull()) {
     if (!ui->glwidget->LoadModel(filename))
@@ -33,7 +33,7 @@ void MainWindow::on_actionLoad_triggered() {
 
 void MainWindow::on_actionLoad_Specular_triggered() {
   QString dir =
-      QFileDialog::getExistingDirectory(this, "Specular CubeMap folder.", "./");
+      QFileDialog::getExistingDirectory(this, "Specular CubeMap folder.", "../textures");
   if (!dir.isEmpty()) {
     if (!ui->glwidget->LoadSpecularMap(dir))
       QMessageBox::warning(this, tr("Error"),
@@ -43,7 +43,7 @@ void MainWindow::on_actionLoad_Specular_triggered() {
 
 void MainWindow::on_actionLoad_Diffuse_triggered() {
   QString dir =
-      QFileDialog::getExistingDirectory(this, "Diffuse CubeMap folder.", "./");
+      QFileDialog::getExistingDirectory(this, "Diffuse CubeMap folder.", "../textures");
   if (!dir.isEmpty()) {
     if (!ui->glwidget->LoadDiffuseMap(dir))
       QMessageBox::warning(this, tr("Error"),

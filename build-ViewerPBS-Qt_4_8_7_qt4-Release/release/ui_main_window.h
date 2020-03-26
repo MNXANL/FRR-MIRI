@@ -49,7 +49,7 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
-    QRadioButton *radio_simple;
+    QRadioButton *radio_refraction;
     QSpacerItem *Spacer;
     QGroupBox *RenderOptions;
     QLabel *Label_NumFaces;
@@ -133,11 +133,11 @@ public:
         label_3 = new QLabel(TreeOptions);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(20, 220, 31, 31));
-        radio_simple = new QRadioButton(TreeOptions);
-        radio_simple->setObjectName(QString::fromUtf8("radio_simple"));
-        radio_simple->setGeometry(QRect(20, 40, 117, 22));
-        radio_simple->setContextMenuPolicy(Qt::CustomContextMenu);
-        radio_simple->setChecked(true);
+        radio_refraction = new QRadioButton(TreeOptions);
+        radio_refraction->setObjectName(QString::fromUtf8("radio_refraction"));
+        radio_refraction->setGeometry(QRect(20, 40, 117, 22));
+        radio_refraction->setContextMenuPolicy(Qt::CustomContextMenu);
+        radio_refraction->setChecked(true);
 
         Configuration->addWidget(TreeOptions);
 
@@ -201,7 +201,7 @@ public:
         QObject::connect(spin_f0b, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelB(double)));
         QObject::connect(spin_f0g, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelG(double)));
         QObject::connect(spin_f0r, SIGNAL(valueChanged(double)), glwidget, SLOT(SetFresnelR(double)));
-        QObject::connect(radio_simple, SIGNAL(clicked(bool)), glwidget, SLOT(SetSimple(bool)));
+        QObject::connect(radio_refraction, SIGNAL(clicked(bool)), glwidget, SLOT(SetRefraction(bool)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -219,7 +219,7 @@ public:
         label->setText(QApplication::translate("MainWindow", "F0 R", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "F0 G", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "F0 B", 0, QApplication::UnicodeUTF8));
-        radio_simple->setText(QApplication::translate("MainWindow", "Simple", 0, QApplication::UnicodeUTF8));
+        radio_refraction->setText(QApplication::translate("MainWindow", "Refraction", 0, QApplication::UnicodeUTF8));
         RenderOptions->setTitle(QString());
         Label_NumFaces->setText(QApplication::translate("MainWindow", "0", 0, QApplication::UnicodeUTF8));
         Label_Faces->setText(QApplication::translate("MainWindow", "Faces", 0, QApplication::UnicodeUTF8));
