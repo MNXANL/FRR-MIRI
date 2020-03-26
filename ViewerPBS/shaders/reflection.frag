@@ -11,5 +11,7 @@ void main()
 {             
     vec3 I = normalize(frag_vertex - camera_position);
     vec3 R = reflect(I, normalize(frag_normal));
-    FragColor = vec4(texture(specular_map, R).rgb, 1.0);
+
+    vec3 gamma = pow(texture(specular_map,R).rgb, vec3(1.0/2.2));
+    FragColor = vec4(gamma, 1.0);
 }
