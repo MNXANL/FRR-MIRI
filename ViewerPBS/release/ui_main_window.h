@@ -9,7 +9,9 @@
 #ifndef UI_MAIN_WINDOW_H
 #define UI_MAIN_WINDOW_H
 
+#include <qglobal.h>
 #include <QtCore/QVariant>
+#if QT_VERSION >= 0x050000  // Using Qt5
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDoubleSpinBox>
@@ -23,6 +25,21 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#else // Using Qt4
+#include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QDoubleSpinBox>
+#include <QtGui/QGroupBox>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QMainWindow>
+#include <QtGui/QMenu>
+#include <QtGui/QMenuBar>
+#include <QtGui/QRadioButton>
+#include <QtGui/QSpacerItem>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QWidget>
+#endif
 #include "glwidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -44,9 +61,11 @@ public:
     QDoubleSpinBox *spin_f0r;
     QDoubleSpinBox *spin_f0g;
     QDoubleSpinBox *spin_f0b;
+    QDoubleSpinBox *spin_g;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
+    QLabel *label_4;
     QRadioButton *radio_refraction;
     QSpacerItem *Spacer;
     QGroupBox *RenderOptions;
@@ -122,6 +141,14 @@ public:
         spin_f0b->setMaximum(2.000000000000000);
         spin_f0b->setSingleStep(0.050000000000000);
         spin_f0b->setValue(0.200000000000000);
+
+        spin_g = new QDoubleSpinBox(TreeOptions);
+        spin_g->setObjectName(QString::fromUtf8("spin_f0b"));
+        spin_g->setGeometry(QRect(100, 290, 41, 27));
+        spin_g->setMaximum(3.000000000000000);
+        spin_g->setSingleStep(1.000000000000000);
+        spin_g->setValue(0.000000000000000);
+
         label = new QLabel(TreeOptions);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(20, 140, 31, 31));
@@ -131,6 +158,9 @@ public:
         label_3 = new QLabel(TreeOptions);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(20, 220, 31, 31));
+        label_4 = new QLabel(TreeOptions);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(20, 260, 31, 31));
         radio_refraction = new QRadioButton(TreeOptions);
         radio_refraction->setObjectName(QString::fromUtf8("radio_refraction"));
         radio_refraction->setGeometry(QRect(20, 40, 117, 22));
@@ -208,7 +238,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actionQuit->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
-        actionLoad->setText(QCoreApplication::translate("MainWindow", "Load", nullptr));
+        actionLoad->setText(QCoreApplication::translate("MainWindow", "Load Model", nullptr));
         actionLoad_Specular->setText(QCoreApplication::translate("MainWindow", "Load Specular", nullptr));
         actionLoad_Diffuse->setText(QCoreApplication::translate("MainWindow", "Load Diffuse", nullptr));
         TreeOptions->setTitle(QCoreApplication::translate("MainWindow", "Options", nullptr));
@@ -217,6 +247,7 @@ public:
         label->setText(QCoreApplication::translate("MainWindow", "F0 R", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "F0 G", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "F0 B", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Geometry", nullptr));
         radio_refraction->setText(QCoreApplication::translate("MainWindow", "Refraction", nullptr));
         RenderOptions->setTitle(QString());
         Label_NumFaces->setText(QCoreApplication::translate("MainWindow", "0", nullptr));

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_GLWidget_t {
-    QByteArrayData data[13];
-    char stringdata0[128];
+    QByteArrayData data[14];
+    char stringdata0[148];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,13 +43,14 @@ QT_MOC_LITERAL(8, 70, 13), // "SetReflection"
 QT_MOC_LITERAL(9, 84, 7), // "SetBRDF"
 QT_MOC_LITERAL(10, 92, 11), // "SetFresnelR"
 QT_MOC_LITERAL(11, 104, 11), // "SetFresnelB"
-QT_MOC_LITERAL(12, 116, 11) // "SetFresnelG"
+QT_MOC_LITERAL(12, 116, 11), // "SetFresnelG"
+QT_MOC_LITERAL(13, 128, 19) // "SetGeometryFunction"
 
     },
     "GLWidget\0SetFaces\0\0SetVertices\0"
     "SetFramerate\0paintGL\0SetRefraction\0"
     "set\0SetReflection\0SetBRDF\0SetFresnelR\0"
-    "SetFresnelB\0SetFresnelG"
+    "SetFresnelB\0SetFresnelG\0SetGeometryFunction"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +60,7 @@ static const uint qt_meta_data_GLWidget[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,18 +68,19 @@ static const uint qt_meta_data_GLWidget[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   64,    2, 0x06 /* Public */,
-       3,    1,   67,    2, 0x06 /* Public */,
-       4,    1,   70,    2, 0x06 /* Public */,
+       1,    1,   69,    2, 0x06 /* Public */,
+       3,    1,   72,    2, 0x06 /* Public */,
+       4,    1,   75,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   73,    2, 0x09 /* Protected */,
-       6,    1,   74,    2, 0x09 /* Protected */,
-       8,    1,   77,    2, 0x09 /* Protected */,
-       9,    1,   80,    2, 0x09 /* Protected */,
-      10,    1,   83,    2, 0x09 /* Protected */,
-      11,    1,   86,    2, 0x09 /* Protected */,
-      12,    1,   89,    2, 0x09 /* Protected */,
+       5,    0,   78,    2, 0x09 /* Protected */,
+       6,    1,   79,    2, 0x09 /* Protected */,
+       8,    1,   82,    2, 0x09 /* Protected */,
+       9,    1,   85,    2, 0x09 /* Protected */,
+      10,    1,   88,    2, 0x09 /* Protected */,
+      11,    1,   91,    2, 0x09 /* Protected */,
+      12,    1,   94,    2, 0x09 /* Protected */,
+      13,    1,   97,    2, 0x09 /* Protected */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    2,
@@ -90,6 +92,7 @@ static const uint qt_meta_data_GLWidget[] = {
     QMetaType::Void, QMetaType::Bool,    7,
     QMetaType::Void, QMetaType::Bool,    7,
     QMetaType::Void, QMetaType::Bool,    7,
+    QMetaType::Void, QMetaType::Double,    2,
     QMetaType::Void, QMetaType::Double,    2,
     QMetaType::Void, QMetaType::Double,    2,
     QMetaType::Void, QMetaType::Double,    2,
@@ -113,6 +116,7 @@ void GLWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 7: _t->SetFresnelR((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 8: _t->SetFresnelB((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 9: _t->SetFresnelG((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 10: _t->SetGeometryFunction((*reinterpret_cast< double(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -170,13 +174,13 @@ int GLWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 11;
     }
     return _id;
 }
